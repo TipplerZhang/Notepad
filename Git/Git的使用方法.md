@@ -36,11 +36,55 @@ Windows风格的命令行
 > * history :查看命令历史。  
 > * help :帮助。  
 > * exit :退出。  
-> * \# :表示注释。  
-# 4 使用Git管理文件版本
-## 创建版本库
-版本库又名仓库，英文名repository,可以简单理解为一个目录，这个目录里的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时候都能追踪历史，由于Git是分布式版本管理工具，
-所以在不联网的情况下，Git也具有完整的版本管理能力。  
-通过命令行界面Git Bash Here完成功能：  
-创建本地仓库命令：`git init`，可以得到一个`.git`文件夹，也就是一个本地仓库。  
-# 5 向本地仓库（.git）中添加文件
+> * \# :表示注释。 
+# 4 Git配置
+### 所有的配置文件，其实都保存在本地！
+## 查看不同级别的配置文件
+* 查看全局配置：`git config -l`  
+* 查看系统配置：`git config --system --list`  
+* 查看当前用户配置：`git config --global --list`  
+## Git相关的配置文件
+> * `Git\etc\gitconfig` :Git安装目录下的gitconfig   --system 系统级  
+> * `C\Users\Administrator\.gitconfig` :只适用于当前登录用户的配置  --global 全局  
+## 设置用户名与邮箱（用户标识，必要）
+安装Git后首先要做的事情是设置自己的用户名称和e-mail地址。因为Git每次提交都会使用该信息，它被永远的嵌入到了你的提交中：
+> * `git config --global user.name "zhangleyuan"`  #名称  
+> * `git config --global user.email zhangleyuan4@gmail.com`   #邮箱  
+## 配置环境变量
+> 在Path中设置：`D\Git\cmd`即可，大多数系统会自动添加，如果没有，加上即可。  
+# 5 Git基本理论
+## 工作区域
+Git本地有三个工作区域 ：工作目录(working Directory)、暂存区(Stage/Index)、资源库(Repository或Git Directory).如果在加上远程的git仓库(Remote Directory)就可以分为四个工作区域。  
+> * Workspace :工作区，就是自己平时存放项目代码的地方。  
+> * Index/Stage : 暂存区，用于临时存放自己的改动，事实上它只是一个文件，保存即将提交到文件列表信息。  
+> * Repository : 仓库区（或本地仓库），就是安全存放数据的位置，这里面有自己提交到所有版本的数据，其中HEAD指向最新放入仓库的版本。  
+> * Remote : 远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换，如Github或Gitee.  
+## 转换关系
+* `working Directory---(git add files)---Stage/Index---(git commit)---History---(git push)---Remote Directory`  #本地到远程  
+* `Remote Directory---(git pull)---History---(git reset)---Stage/Index---(git checkout)---working Directory`  #远程到本地  
+## 工作流程
+git的工作流程一般是这样的：  
+> 1.在工作目录中添加、修改文件；
+> 2.将需要进行版本管理的文件放入暂存区域；
+> 3.将暂存区域的文件提交到git仓库。  
+因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交（committed）.  
+# 6 Git项目搭建
+## 创建工作目录与常用指令
+工作目录（WorkSpace）一般就是你希望Git帮助你管理的文件夹，可以是你项目的目录，也可以是一个空目录，建议不要有中文。
+### 日常使用只要记住下图6个命令：
+* add
+* commit
+* push
+* pull
+* fetch/clone
+* checkout  
+## 本地仓库搭建
+创建本地仓库的方法有两种：一种是创建全新的仓库，另一种是克隆远程仓库。  
+1.创建全新的仓库，需要用Git管理的项目的根目录执行：  
+> #在当前目录新建一个Git代码库  
+> `git init`
+2.执行后可以看到，仅仅在项目目录多出了一个.git目录，关于版本等的所有信息都在这个目录里面。  
+## 克隆远程仓库
+1.另一种方式是克隆远程仓库目录，由于是将远程服务器上的仓库完全镜像一份至本地！  
+> #克隆一个项目和它的整个代码历史（版本信息）  
+> 
