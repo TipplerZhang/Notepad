@@ -124,7 +124,7 @@ git的工作流程一般是这样的：
 build/  #忽略build/目录下的所有文件  
 doc/*.txt   #会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
 ```
-# 8 Gitee配置SSH公钥及创建远程仓库
+# 8 Github配置SSH公钥及创建远程仓库
 设置本机绑定SSH公钥，实现免密码登录！（免密码登录，这一步挺重要的，Github是远程仓库，我们是平时工作在本地仓库！）  
 > #进入C：\Users，找到.ssh目录，如果没有，则新建一个！    
 > #生成公钥：`ssh-keygen`   
